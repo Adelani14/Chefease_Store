@@ -13,8 +13,12 @@
     <div id="show"></div>
     <div id="show2"></div>
     <div class="w-75 mx-auto text-center mb-5" style="margin-top: 80px;">
-        <button class=" btn bg-danger text-light  fs-6" id="deleteALLItems" style="display: none;"
-            onclick="deleteALL();"> 🗑️ Delete All Items</button>
+        <button class=" btn bg-danger text-light  fs-6" id="deleteALLItems" onclick="deleteALL();"> 🗑️ Delete All Items
+        </button>
+        <button class=" btn bg-warning mt-5 text-light  fs-6" id="CheckOut">
+
+        </button>
+
     </div>
     <script>
 
@@ -47,6 +51,8 @@
         let AllProducts = JSON.parse(localStorage.getItem('ProductList')) || [];
 
         function myFunction() {
+            let CheckOutAmount = 0;
+
             show.innerHTML = '';
             if (AllProducts.length === 0) {
 
@@ -64,9 +70,11 @@
 
 
                 deleteALLItems.style.display = 'none';
+                CheckOut.style.display = 'none';
 
             } else {
                 deleteALLItems.style.display = 'block'
+                CheckOut.style.display = 'block'
 
 
                 for (let i = 0; i < AllProducts.length; i++) {
@@ -100,9 +108,14 @@
                     
     
     `
+                    CheckOutAmount += AllProducts[i].Quantity * AllProducts[i].Price.replace('$', '');
+                    CheckOut.innerHTML = `🛒 Check Out - $${CheckOutAmount.toFixed(2)}`;
 
 
                 }
+
+                CheckOut.innerHTML = `🛒 Check Out - $${CheckOutAmount.toFixed(2)}`;
+
             }
         }
 

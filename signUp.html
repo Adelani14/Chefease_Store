@@ -21,6 +21,14 @@
                         </div>
 
                         <form>
+                            
+                            <!-- Full name -->
+                            <!-- <div class="mb-3">
+                                <label for="displayName" class="form-label fw-semibold text-dark">Name</label>
+                                <input type="email" class="form-control form-control-lg" id="displayName"
+                                    placeholder="Enter full name" required>
+
+                            </div> -->
                             <!-- Email -->
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-semibold text-dark">Email Address</label>
@@ -151,7 +159,7 @@
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user
-                console.log(user);
+                // console.log(user);
                 if (user) {
                     setTimeout(() => {
                         window.location.href = 'dashboard.html'
@@ -174,7 +182,7 @@
         signInWithPopup(auth, Gprovider)
             .then((result) => {
                 const user = result.user
-                console.log(user);
+                // console.log(user);
                 if (user) {
                     setTimeout(() => {
                         window.location.href = 'dashboard.html'
@@ -196,6 +204,7 @@
     const signUp =  ()=> {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
+        // const displayName = document.getElementById("displayName").value;
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
