@@ -15,7 +15,7 @@
     <div class="w-75 mx-auto text-center mb-5" style="margin-top: 80px;">
         <button class=" btn bg-danger text-light  fs-6" id="deleteALLItems" onclick="deleteALL();"> 🗑️ Delete All Items
         </button>
-        <button class=" btn bg-warning mt-5 text-light  fs-6" id="CheckOut">
+        <button class="btn btn-warning text-light w-auto mt-5 fw-bold fs-4 " id="CheckOut">
 
         </button>
 
@@ -84,24 +84,30 @@
 
                     <p>${i + 1}</p>
                     
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3 me-4" style="max-width: 540px;">
           <div class="row g-0">
-                  <div class="col-md-4">
-                    <img src="${AllProducts[i].Image}" class="img-fluid rounded-start w-100 h-100" alt="...">
-                  </div>
+                  <div class="col-md-4 h-auto">
+                    <img src="${AllProducts[i].Image}" class="img-fluid rounded-start w-100 " alt="...">
+                   
+                   </div>
+
                <div class="col-md-8">
                          <div class="card-body">
               
                             <h3>${AllProducts[i].Name}</h3>
                             <p>${AllProducts[i].Description}</p>
                             <p>${AllProducts[i].Price}</p>
-                            <div style=" display:flex; gap:10px; margin-bottom: 20px;">
+                            
+                         </div>
+               </div>
+
+                <div class=" mb-3 d-flex gap-5 ms-4">
+                    <button class="btn btn-outline-warning border-0 text-dark" onclick="RemoveItem(${i});">🚮 Remove </button>    
+                     <div style=" display:flex; gap:10px; margin-bottom: 20px;">
                             <button class=" btn bg-secondary text-light  fs-6" onclick="ProductNumSub(${i});"> - </button> <div class="mt-2">${AllProducts[i].Quantity}</div> <button class=" btn bg-warning text-light  fs-6" onclick="ProductPlus(${i})"> + </button>
-                          </div>
-                   <button class="btn btn-outline-warning border-0 text-dark" onclick="RemoveItem(${i});">🚮 Remove </button>
+                     </div>
                 </div>
-            </div>
-        </div>
+         </div>
     </div>
     
 
