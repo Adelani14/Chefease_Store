@@ -40,6 +40,12 @@
 
         }
         function ProductNumSub(index) {
+            if (AllProducts[index].Quantity === 1) {
+                Psum.disabled = true;
+                return;
+            }else {
+                Psum.disabled = false;
+            
             AllProducts[index].Quantity--;
             localStorage.setItem('ProductList', JSON.stringify(AllProducts));
             AllProducts = JSON.parse(localStorage.getItem('ProductList')) || [];
@@ -47,6 +53,7 @@
             myFunction();
 
         }
+    }
 
         let AllProducts = JSON.parse(localStorage.getItem('ProductList')) || [];
 
@@ -104,7 +111,7 @@
                 <div class=" mb-3 d-flex gap-5 ms-4">
                     <button class="btn btn-outline-warning border-0 text-dark" onclick="RemoveItem(${i});">🚮 Remove </button>    
                      <div style=" display:flex; gap:10px; margin-bottom: 20px;">
-                            <button class=" btn bg-secondary text-light  fs-6" onclick="ProductNumSub(${i});"> - </button> <div class="mt-2">${AllProducts[i].Quantity}</div> <button class=" btn bg-warning text-light  fs-6" onclick="ProductPlus(${i})"> + </button>
+                            <button class=" btn bg-secondary text-light  fs-6" onclick="ProductNumSub(${i});" id="Psum"> - </button> <div class="mt-2">${AllProducts[i].Quantity}</div> <button class=" btn bg-warning text-light  fs-6" onclick="ProductPlus(${i})"> + </button>
                      </div>
                 </div>
          </div>
