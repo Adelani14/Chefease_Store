@@ -190,14 +190,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto me-3 gap-3">
-                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Reviews</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
 
-                <button class="btn btn-outline-warning me-2"><a href="signIn.html"
-                        class="text-decoration-none text-dark">Login</a></button>
+                
                 <button class="btn btn-warning"><a href="signIn.html"
                         class="text-decoration-none text-light">Shop Now</a></button>
             </div>
@@ -451,7 +450,6 @@
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         profile_header.innerHTML = `
                     
             
@@ -475,12 +473,12 @@
 
     const signouter = () => {
       signOut(auth).then(() => {
-        console.log('Sign-out successful.');
+        
         setTimeout(() => {
           window.location.href = 'index.html'
         }, 1000);
       }).catch((error) => {
-        // console.log('An error happened.);    
+        console.log('An error happened.');    
       });
     }
     window.signouter = signouter;

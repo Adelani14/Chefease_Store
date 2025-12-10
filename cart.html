@@ -15,7 +15,7 @@
     <div class="w-75 mx-auto text-center mb-5" style="margin-top: 80px;">
         <button class=" btn bg-danger text-light  fs-6" id="deleteALLItems" onclick="deleteALL();"> 🗑️ Delete All Items
         </button>
-        <button class="btn btn-warning text-light w-auto mt-5 fw-bold fs-4 " id="CheckOut">
+        <button class="btn btn-warning text-light w-auto mt-5 fw-bold fs-4 " id="CheckOut" onclick="checkoutbtn()">
 
         </button>
 
@@ -43,17 +43,17 @@
             if (AllProducts[index].Quantity === 1) {
                 Psum.disabled = true;
                 return;
-            }else {
+            } else {
                 Psum.disabled = false;
-            
-            AllProducts[index].Quantity--;
-            localStorage.setItem('ProductList', JSON.stringify(AllProducts));
-            AllProducts = JSON.parse(localStorage.getItem('ProductList')) || [];
 
-            myFunction();
+                AllProducts[index].Quantity--;
+                localStorage.setItem('ProductList', JSON.stringify(AllProducts));
+                AllProducts = JSON.parse(localStorage.getItem('ProductList')) || [];
 
+                myFunction();
+
+            }
         }
-    }
 
         let AllProducts = JSON.parse(localStorage.getItem('ProductList')) || [];
 
@@ -157,6 +157,25 @@
             }
 
         }
+        const checkoutbtn = () => {
+            CheckOut.innerHTML = `<i>processing...</i>`
+            setTimeout(() => {
+                CheckOut.innerHTML = `<i>completed</i>`
+            }, 1000);
+
+
+            setTimeout(() => {
+                alert('Thank you for your purchase! Your order has been placed successfully.');
+
+                AllProducts = [];
+                localStorage.setItem('ProductList', JSON.stringify(AllProducts));
+                AllProducts = JSON.parse(localStorage.getItem('ProductList')) || [];
+                myFunction();
+            }, 1500);
+
+
+        }
+
 
 
 
