@@ -24,7 +24,11 @@
                         <form>
 
                             <div class="mb-3">
-                                <label for="loginEmail">Email address
+                                <small class=" text-danger " id="errorMessage" style="display: none;">
+                                    Fill up all the inputs!
+                                </small>
+                                <label for="loginEmail">
+                                    Email address
                                 </label>
                                 <input type="email" class="form-control form-control-lg" id="loginEmail"
                                     placeholder="Enter your email address">
@@ -37,12 +41,17 @@
                                 <input type="password" class="form-control form-control-lg" id="loginPassword"
                                     placeholder="Type your password" required>
                             </div>
+                            <small class=" text-danger " id="errorMessage2" style="display: none;">
+                                    Invalid email or password!
+                                </small>
 
                             <!-- Forgot Password -->
                             <div class="mb-4 text-end">
                                 <a href="#" class="text-warning fw-semibold text-decoration-none small">Forgot
                                     password?</a>
                             </div>
+
+                            
                         </form>
                         <!-- Login Button -->
                         <button class="btn btn-warning btn-lg w-100 fw-bold mb-4" onclick="login()">LOGIN</button>
@@ -175,20 +184,34 @@
 
 
 
-        const login =  ()=> {
+        const login = () => {
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
 
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    console.log(userCredential);
-                    
 
-                    window.location.href = "dashboard.html";
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
+            if (email === "" || password === "") {
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 2000);
+                return;
+            } else {
+
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        console.log(userCredential);
+
+
+                        window.location.href = "dashboard.html";
+                    })
+                    .catch((error) => {
+                        errorMessage2.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage2.style.display = 'none';
+                }, 2000);
+                return;
+                    });
+            }
         };
         window.login = login;
 

@@ -21,22 +21,19 @@
                         </div>
 
                         <form>
-                            
-                            <!-- Full name -->
-                            <!-- <div class="mb-3">
-                                <label for="displayName" class="form-label fw-semibold text-dark">Name</label>
-                                <input type="email" class="form-control form-control-lg" id="displayName"
-                                    placeholder="Enter full name" required>
+                            <small class=" text-danger " id="errorMessage3" style="display: none;">
+                                    Fill up all the inputs!
+                                </small>
 
-                            </div> -->
                             <!-- Email -->
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-semibold text-dark">Email Address</label>
                                 <input type="email" class="form-control form-control-lg" id="email"
                                     placeholder="Enter your email" required>
-
+                                <small class="ms-3 text-danger " id="erroremail" style="display: none;">
+                                    enter a valid email address!
+                                </small>
                             </div>
-
                             <!-- Password -->
                             <div class="mb-3">
                                 <label for="password" class="form-label fw-semibold text-dark">Password</label>
@@ -52,24 +49,30 @@
                                 <input type="password" class="form-control form-control-lg" id="Cpass"
                                     placeholder="Confirm your password" required>
 
-
+                                <small class="ms-3 text-danger " id="errorMessage" style="display: none;">
+                                    Passwords do not match!
+                                </small>
+                                <small class="ms-3 text-danger " id="errorMessage2" style="display: none;">
+                                    enter a valid password!
+                                </small>
+                                <!-- <small id="passwordHelpBlock" class="form-text text-danger"></small> -->
                             </div>
-                            </form>
+                        </form>
 
-                            <!-- Terms & Conditions -->
-                            <div class="mb-4 form-check">
-                                <label class="form-check-label text-dark small" for="terms">
-                                    <input type="checkbox" class="" id="terms" required>
+                        <!-- Terms & Conditions -->
+                        <div class="mb-4 form-check">
+                            <label class="form-check-label text-dark small" for="terms">
+                                <input type="checkbox" class="" id="terms" required>
 
-                                    I agree to the <a href="#"
-                                        class="text-warning text-decoration-none fw-semibold">Terms & Conditions</a>
-                                </label>
-                            </div>
+                                I agree to the <a href="#" class="text-warning text-decoration-none fw-semibold">Terms &
+                                    Conditions</a>
+                            </label>
+                        </div>
 
-                            <!-- Sign Up Button -->
-                            <button type="button" class="btn btn-warning btn-lg w-100 fw-bold mb-4"
-                                onclick="signUp();">SIGN UP</button>
-                        
+                        <!-- Sign Up Button -->
+                        <button type="button" class="btn btn-warning btn-lg w-100 fw-bold mb-4" onclick="signUp();">SIGN
+                            UP</button>
+
 
                         <!-- Divider -->
                         <div class="text-center position-relative mb-4">
@@ -137,7 +140,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-   
+
 
 
     const firebaseConfig = {
@@ -201,20 +204,62 @@
 
 
 
-    const signUp =  ()=> {
+    const signUp = () => {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        // const displayName = document.getElementById("displayName").value;
+        const Cpassword = document.getElementById("Cpass").value;
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-            
-                window.location.href = "dashboard.html";
-            })
-            .catch((error) => {
-                alert(error.message);
-            });
+        if(email==="" || password==="" || Cpassword===""){
+           errorMessage3.style.display = 'block';
+            setTimeout(() => {
+                errorMessage3.style.display = 'none';
+            }, 2000);
+            return;
+        }else{
+
+        
+        let PassChecked = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+        let emailChecked = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let emailValid = emailChecked.test(email);
+        if (!emailValid) {
+            erroremail.style.display = 'block';
+            setTimeout(() => {
+                erroremail.style.display = 'none';
+            }, 2000);
+            return;
+        }
+
+
+        let PassValid = PassChecked.test(password);
+        if (!PassValid) {
+            errorMessage2.style.display = 'block';
+            setTimeout(() => {
+                errorMessage2.style.display = 'none';
+            }, 2000);
+            return;
+        } else {
+
+            if (password !== Cpassword) {
+
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 2000);
+            } else {
+                errorMessage.style.display = 'none';
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+
+                        window.location.href = "dashboard.html";
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            }
+        }
+
+    }
     };
-    window.signUp=signUp;
+    window.signUp = signUp;
 
 </script>

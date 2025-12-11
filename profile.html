@@ -196,15 +196,15 @@
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
 
-                
-                <button class="btn btn-warning"><a href="signIn.html"
-                        class="text-decoration-none text-light">Shop Now</a></button>
+
+                <button class="btn btn-warning"><a href="signIn.html" class="text-decoration-none text-light">Shop
+                        Now</a></button>
             </div>
         </div>
     </nav>
 
     <main class="container py-5">
-       
+
 
         <!-- Profile Header -->
         <div class="profile-header" id="profile_header"></div>
@@ -327,7 +327,7 @@
                     </div>
                 </div>
 
-                
+
                 <!-- Logout Button -->
                 <div class="text-center mt-4">
                     <button class="btn btn-logout" onclick="signouter();">
@@ -347,7 +347,7 @@
                         </p>
                         <p style="margin-bottom: 1rem;">
                             <strong>Member Since:</strong><br>
-                            <span style="color: #666;" id="Member_since"></span>
+                            <span style="color: #666;" id="member_since"></span>
                         </p>
                         <p style="margin-bottom: 0;">
                             <strong>Account Status:</strong><br>
@@ -363,7 +363,8 @@
                             <strong>Total Orders:</strong> <span style="color: var(--accent); font-weight: 700;"></span>
                         </p>
                         <p style="margin-bottom: 0.5rem;">
-                            <strong>Total Spent:</strong> <span style="color: var(--accent); font-weight: 700;">$0.00</span>
+                            <strong>Total Spent:</strong> <span
+                                style="color: var(--accent); font-weight: 700;">$0.00</span>
                         </p>
                         <p style="margin-bottom: 0;">
                             <strong>Last Order:</strong> <span style="color: #666;"></span>
@@ -374,7 +375,8 @@
                 <div class="settings-card">
                     <div class="settings-section-title">Quick Links</div>
                     <div style="padding: 1.5rem;">
-                        <a href="cart.html" class="d-block text-decoration-none text-warning mb-2" style="font-weight: 600;">
+                        <a href="cart.html" class="d-block text-decoration-none text-warning mb-2"
+                            style="font-weight: 600;">
                             → View Cart
                         </a>
                         <a href="#" class="d-block text-decoration-none text-warning mb-2" style="font-weight: 600;">
@@ -420,7 +422,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="text-center mt-3 small text-muted">© <span id="year"></span> ChefEase. All rights reserved.</div>
+            <div class="text-center mt-3 small text-muted">© <span id="year"></span> ChefEase. All rights reserved.
+            </div>
         </div>
     </footer>
 
@@ -428,62 +431,62 @@
 
 
 
-    
-  <script type="module">
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+    <script type="module">
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCvME6qmwrMMwHRT6W5EoHYrjLveG4rR8Y",
-      authDomain: "chefease-6459a.firebaseapp.com",
-      projectId: "chefease-6459a",
-      storageBucket: "chefease-6459a.firebasestorage.app",
-      messagingSenderId: "543444849712",
-      appId: "1:543444849712:web:a1d2bca23bffaa32e989f5"
-    };
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app)
-    // const database = getDatabase(app);
+        const firebaseConfig = {
+            apiKey: "AIzaSyCvME6qmwrMMwHRT6W5EoHYrjLveG4rR8Y",
+            authDomain: "chefease-6459a.firebaseapp.com",
+            projectId: "chefease-6459a",
+            storageBucket: "chefease-6459a.firebasestorage.app",
+            messagingSenderId: "543444849712",
+            appId: "1:543444849712:web:a1d2bca23bffaa32e989f5"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app)
+        // const database = getDatabase(app);
 
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        profile_header.innerHTML = `
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                profile_header.innerHTML = `
                     
             
-            <img src="${user.photoURL}"
-                alt="Profile Avatar" class="profile-avatar">
+            <img src="${user.photoURL}" 
+                 class="profile-avatar">
             <h1 class="profile-name"> ${user.displayName}</h1>
             <p class="profile-email">${user.email}</p>
             
             
             
             `
-            sidebar_email.innerText = user.email;
-            member_since.innerText = user.reloadUserInfo.validSince;
+                sidebar_email.innerText = user.email;
+                member_since.innerHTML = user.metadata.creationTime;
 
-      } else {
-        setTimeout(() => {
-          window.location.href = 'signIn.html'
-        }, 1000);
-      }
-    });
+            } else {
+                setTimeout(() => {
+                    window.location.href = 'signIn.html'
+                }, 1000);
+            }
+        });
 
-    const signouter = () => {
-      signOut(auth).then(() => {
-        
-        setTimeout(() => {
-          window.location.href = 'index.html'
-        }, 1000);
-      }).catch((error) => {
-        console.log('An error happened.');    
-      });
-    }
-    window.signouter = signouter;
+        const signouter = () => {
+            signOut(auth).then(() => {
 
-  </script>
+                setTimeout(() => {
+                    window.location.href = 'index.html'
+                }, 1000);
+            }).catch((error) => {
+                console.log('An error happened.');
+            });
+        }
+        window.signouter = signouter;
+
+    </script>
 </body>
 
 </html>
